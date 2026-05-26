@@ -25,6 +25,17 @@ WEB_SEARCH_LLM_EXTRACTION_MODEL=gpt-4.1-mini
 OPENAI_CHAT_MODEL=gpt-4.1-mini
 ```
 
+## Search Methods
+
+Set the default method with `WEB_SEARCH_DEFAULT_METHOD`, or pass `method` when
+calling the LangChain tool.
+
+| Method | What it does | Required env vars | Optional env vars |
+|---|---|---|---|
+| `google_shopping` | Uses SerpAPI Google Shopping to return product title, vendor, price, URL, rating, reviews, and optional delivery enrichment. | `SERPAPI_API_KEY` | `OPENAI_API_KEY` for delivery/vendor enrichment, `WEB_SEARCH_LLM_EXTRACTION_MODEL` |
+| `google_search` | Uses SerpAPI Google Search to find product pages, then Zyte to extract product pricing from the page. | `SERPAPI_API_KEY`, `ZYTE_API_KEY` | `OPENAI_API_KEY` for robust HTML parsing and enhanced URL selection, `WEB_SEARCH_SITES`, `WEB_SEARCH_LLM_EXTRACTION_MODEL` |
+| `tavily` | Uses Tavily general web search and returns normalized title, URL, content, and score results. | `TAVILY_API_KEY` | None |
+
 ## Run
 
 ```powershell
